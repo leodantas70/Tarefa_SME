@@ -21,6 +21,10 @@ class UserController extends Controller
     {
        return view(view:'index');
     }
+    public function login()
+    {
+       return view(view:'login');
+    }
     public function ordem()
     {   
         $protocolo = substr( base64_encode( random_bytes(4) ), 0, -2);
