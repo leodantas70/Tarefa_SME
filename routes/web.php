@@ -21,4 +21,5 @@ Route::get('/mostrarordem',[UserController::class,'show']);
 Route::post('/mostrarordem',[UserController::class, 'show_protocolo']);
 Route::get('/mostrarordemm',[UserController::class, 'show_protocolo']);
 Route::post('/mostrarordemm',[UserController::class, 'show_protocolo']);
+Route::get('/login',[UserController::class,'login']);
 //Route::resource('/index', UserController::class);
