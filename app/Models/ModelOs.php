@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ModelOs extends Model
 {
     protected $table="OrdemS";
-    protected $fillable=["nome","email","mensagem","protocolo"];
+    protected $fillable=["nome","email","mensagem","protocolo","status"];
 }
