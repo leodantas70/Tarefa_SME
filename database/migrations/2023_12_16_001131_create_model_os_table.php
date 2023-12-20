@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('OrdemS', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('protocolo')->unique();
             $table->string('email');
-            $table->text('mensagem');
-            $table->uuid();
+            $table->boolean('ativo');
             $table->timestamps();
         });
     }
