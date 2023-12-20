@@ -9,10 +9,10 @@
             @csrf
             <input class="center col-md-2 offset-md-1" type="text" name="nprotocolo" id="nprotocolo" placeholder="Numero de protocolo:">
             <input class ="btn btn-primary" type="submit" value="Enviar">
-            </form>
+        </form>
     </div>
     </div>
-    </div>
+</div>
 
     
 @endsection

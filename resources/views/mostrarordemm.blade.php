@@ -3,7 +3,6 @@
 <h1 class="text-center"> Ordem de Serviço </h1>
 <div class="container-fluid"><br/><br/>
     <h2 class="text-center display-4">Chamado</h2>
-
     </div>
     <table class="table table-bordered table-hover">
         <thead>
@@ -24,9 +23,9 @@
         <td>{{$protocolo->mensagem}}</td>
         </tr>
         </tbody>
-            
-        
-
-        </table>
-    
+    </table>
+    <a href="{{url("")}}">  <br/>
+        <div class="text-center"> 
+        <button  type="submit" class="btn btn-primary">Voltar</button><br/>  
+        </a></div>
 @endsection
