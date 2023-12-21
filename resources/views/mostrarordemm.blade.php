@@ -14,16 +14,33 @@
         <th>Mensagem</th>
         </tr>
         </thead>
+
         <tbody>
+        @foreach ($nprotocolo as $msg)
+                
+            
         <tr data-widget="expandable-table" aria-expanded="false">
-        <td>{{$protocolo->protocolo}}</td>
-        <td>{{$protocolo->nome}}<</td>
+        <td>{{$msg->nprotocolo}}</td>
+        <td>{{$protocolo->email}}<</td>
         <td>{{$protocolo->created_at}}</td>
-        <td>{{$protocolo->Status}}</td>
-        <td>{{$protocolo->mensagem}}</td>
+        <td>{{$protocolo->ativo}}</td>
+        <td>{{$msg->mensagem}}</td>
         </tr>
+        @endforeach
         </tbody>
+        
     </table>
+
+    <h1 class="text-center"> Enviar mensagem </h1>
+    <div class="text-center">
+        <form name="formmsg" id="formmsg" method="POST" action="{{url("mostrarordemm")}}">
+        @csrf
+        <input class ="form-control" type="text" name="mensagem" id="mensagem" placeholder="Mensagem:">      
+        <input class ="form-control" type="hidden" name="protocolo" id="protocolo" value="{{ $protocolo->protocolo }}">  
+        <input class ="btn btn-primary" type="submit" value="Enviar">
+        </form>
+    </div> 
+
     <a href="{{url("")}}">  <br/>
         <div class="text-center"> 
         <button  type="submit" class="btn btn-primary">Voltar</button><br/>  

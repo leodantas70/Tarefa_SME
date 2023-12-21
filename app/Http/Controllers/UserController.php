@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\ModelOs;
 use Illuminate\Http\Request;
 use app\Models;
+use App\Models\MensagemOs;
+
 class UserController extends Controller
 {
 
   private $chamado;
-
+  private $mensagem;
    public function __construct()    {
-    $this ->chamado = new ModelOs();        
-
+    $this ->chamado = new ModelOs();
+    $this ->mensagem = new MensagemOs();
 }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
        return view(view:'index');
@@ -34,11 +34,13 @@ class UserController extends Controller
     public function Enviar_Chamado(Request $request )
     {   
         $cad=$this->chamado->create([
-        'nome' => $request->nome,
         'email' => $request->email,
-        'mensagem' => $request->mensagem,     
         'protocolo' => $request->protocolo,
         ]);
+        $this->mensagem->create([
+            'nprotocolo' => $request->protocolo,
+            'mensagem' => $request->mensagem,   
+            ]);
         if($cad){
             return view(view:'sucesso', data:['protocolo'=>$request->protocolo]);      
                 }  
@@ -69,14 +71,28 @@ class UserController extends Controller
     }
     public function show_protocolo(Request $request)
     { 
-        $show = $this->chamado->where('protocolo', $request->nprotocolo)->first();
-   
-        if ($show) {
-            return view('mostrarordemm', data:['protocolo'=>$show]);
+        $shownome = $this->chamado->where('protocolo', $request->nprotocolo)->first();
+        $showmensagem = $this->mensagem->where('nprotocolo', $request->nprotocolo)->get();
+        if ($shownome) {
+            return view('mostrarordemm', data:['protocolo'=>$shownome, 'nprotocolo'=>$showmensagem]);
         } else { 
             return view('index');
         }
        
+    }
+
+    public function Adicionar_Mensagem(Request $request)
+    { 
+        $msg = $this->mensagem->create([
+            'nprotocolo' => $request->protocolo,
+            'mensagem' => $request->mensagem,           
+        ]);
+        $protocol = $this->chamado->where('protocolo', $msg->nprotocolo)->first();
+        if ($msg) {
+            return view('mostrarordemm', data:['protocolo'=>$protocol, 'nprotocolo'=>$msg]);
+        } else { 
+            return view('index');
+        }
     }
     /**
      * Show the form for editing the specified resource.
