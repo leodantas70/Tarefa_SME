@@ -36,11 +36,11 @@
     </tbody>        
     </table>
     </div>
-    <h1 class="text-center"> Enviar mensagem </h1>
+    <h1 class="text-center"> Enviar nova mensagem </h1>
     <div class="text-center">
         <form name="formmsg" id="formmsg" method="POST" action="{{url("mostrarordemm")}}">
         @csrf
-        <input class ="form-control" type="text" name="mensagem" id="mensagem" placeholder="Mensagem:">
+        <textarea name="mensagem" id="mensagem" placeholder="Mensagem:" rows="4" cols="50"></textarea><br>
         @foreach ($Mensagens as $Mensagem) <input class ="form-control" type="hidden" name="protocolo" id="chamado_id" value="{{ $Mensagem->chamado_id }}">    @endforeach
         <input class ="btn btn-primary" type="submit" value="Enviar">
         </form>
