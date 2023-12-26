@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('OrdemS', function (Blueprint $table) {
+        Schema::create('Chamado', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('protocolo')->unique();
             $table->string('email');
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('OrdemS');
+        Schema::dropIfExists('Chamado');
     }
 };

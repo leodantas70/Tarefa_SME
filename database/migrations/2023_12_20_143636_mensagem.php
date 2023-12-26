@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function Laravel\Prompts\table;
+
 return new class extends Migration
 {
     /**
@@ -11,9 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mensagem', function (Blueprint $table) {
+        
+        Schema::create('Mensagem', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->string('nprotocolo');
+            $table->unsignedBigInteger('chamado_id');
+            $table->foreign('chamado_id')->references('id')->on('chamado')->onDelete(action:'cascade')->onUpdate(action:'cascade');
             $table->string('mensagem');
             $table->timestamps();
         });
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mensagem');
+        Schema::dropIfExists('Mensagem');
     }
 };
