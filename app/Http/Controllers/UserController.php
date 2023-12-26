@@ -74,13 +74,19 @@ class UserController extends Controller
     public function show_protocolo(Request $request)
     { 
         $shownome = $this->chamado->where('protocolo', $request->nprotocolo)->get();
-        $id= $shownome->first();
-        $showmensagem = $this->mensagem->where('chamado_id', $id->id)->get();
         if ($shownome) {
+            $id= $shownome->first();
+            if($id){
+            $showmensagem = $this->mensagem->where('chamado_id', $id->id)->get();
             return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
-        } else { 
-            return view('index');
+            }
+            else{
+                return view('index');
+            }
         }
+        else{
+            return view('index');
+        }        
        
     }
 
