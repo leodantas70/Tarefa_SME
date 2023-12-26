@@ -15,11 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[UserController::class, 'index'])->name('index');
-Route::get('/ordem',[UserController::class,'ordem']);
-Route::post('/ordem',[UserController::class, 'Enviar_Chamado'])->name('Enviar_Chamado');
+Route::get('/chamado',[UserController::class,'chamado']);
+Route::post('/chamado',[UserController::class, 'Enviar_Chamado'])->name('Enviar_Chamado');
 Route::get('/mostrarordem',[UserController::class,'show']);
 Route::post('/mostrarordem',[UserController::class, 'show_protocolo']);
-Route::get('/mostrarordemm',[UserController::class, 'show_protocolo']);
 Route::get('/mostrarordemm',[UserController::class, 'Adicionar_Mensagem']);
 Route::post('/mostrarordemm',[UserController::class, 'Adicionar_Mensagem']);
 Route::get('/login',[UserController::class,'login']);
