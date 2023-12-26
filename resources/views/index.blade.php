@@ -2,7 +2,7 @@
 @section ('body')
 <h1 class="text-center"> Bem vindo a Tarefa_SME </h1>
     <div class="text-center">
-    <a href="{{ url ("ordem") }} ">  <br/>
+    <a href="{{ url ("chamado") }} ">  <br/>
         <button  type="submit" class="btn btn-primary">Abrir Chamado</button><br/>  
     </a>
     </div>   
