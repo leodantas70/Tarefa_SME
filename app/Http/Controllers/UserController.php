@@ -25,11 +25,11 @@ class UserController extends Controller
     {
        return view(view:'login');
     }
-    public function ordem()
+    public function chamado()
     {   
         $protocolo = substr( base64_encode( random_bytes(4) ), 0, -2);
 
-        return view(view:'ordem', data:['numero_protocolo'=> $protocolo]);
+        return view(view:'chamado', data:['numero_protocolo'=> $protocolo]);
     }
     public function Enviar_Chamado(Request $request )
     {   
@@ -37,9 +37,11 @@ class UserController extends Controller
         'email' => $request->email,
         'protocolo' => $request->protocolo,
         ]);
+        $id=$this->chamado->where('protocolo', $request->protocolo)->get();
+        $idd=$id->first();
         $this->mensagem->create([
-            'nprotocolo' => $request->protocolo,
-            'mensagem' => $request->mensagem,   
+        'chamado_id' => $idd->id, 
+        'mensagem' => $request->mensagem,   
             ]);
         if($cad){
             return view(view:'sucesso', data:['protocolo'=>$request->protocolo]);      
@@ -71,10 +73,11 @@ class UserController extends Controller
     }
     public function show_protocolo(Request $request)
     { 
-        $shownome = $this->chamado->where('protocolo', $request->nprotocolo)->first();
-        $showmensagem = $this->mensagem->where('nprotocolo', $request->nprotocolo)->get();
+        $shownome = $this->chamado->where('protocolo', $request->nprotocolo)->get();
+        $id= $shownome->first();
+        $showmensagem = $this->mensagem->where('chamado_id', $id->id)->get();
         if ($shownome) {
-            return view('mostrarordemm', data:['protocolo'=>$shownome, 'nprotocolo'=>$showmensagem]);
+            return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
         } else { 
             return view('index');
         }
@@ -84,12 +87,14 @@ class UserController extends Controller
     public function Adicionar_Mensagem(Request $request)
     { 
         $msg = $this->mensagem->create([
-            'nprotocolo' => $request->protocolo,
+            'chamado_id' => $request->protocolo,
             'mensagem' => $request->mensagem,           
         ]);
-        $protocol = $this->chamado->where('protocolo', $msg->nprotocolo)->first();
+        $id= $msg->first();
+        $shownome = $this->chamado->where('id', $id->chamado_id)->get();
+        $showmensagem = $this->mensagem->where('chamado_id', $id->chamado_id)->get();
         if ($msg) {
-            return view('mostrarordemm', data:['protocolo'=>$protocol, 'nprotocolo'=>$msg]);
+            return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
         } else { 
             return view('index');
         }
