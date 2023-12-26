@@ -89,10 +89,9 @@ class UserController extends Controller
         $msg = $this->mensagem->create([
             'chamado_id' => $request->protocolo,
             'mensagem' => $request->mensagem,           
-        ]);
-        $id= $msg->first();
-        $shownome = $this->chamado->where('id', $id->chamado_id)->get();
-        $showmensagem = $this->mensagem->where('chamado_id', $id->chamado_id)->get();
+        ]);        
+        $shownome = $this->chamado->where('id', $request->protocolo)->get();
+        $showmensagem = $this->mensagem->where('chamado_id', $request->protocolo)->get();
         if ($msg) {
             return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
         } else { 
