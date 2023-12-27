@@ -73,36 +73,26 @@ class UserController extends Controller
     }
     public function show_protocolo(Request $request)
     { 
-        $shownome = $this->chamado->where('protocolo', $request->nprotocolo)->get();
-        if ($shownome) {
-            $id= $shownome->first();
-            if($id){
-            $showmensagem = $this->mensagem->where('chamado_id', $id->id)->get();
-            return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
-            }
-            else{
-                return view('index');
-            }
+        $chamado = ModelOs::where('protocolo', $request->nprotocolo)->first();
+        if ($chamado) {
+            $msg = $chamado->mensagens;
+            return view('mostrarordemm', data:['Chamado'=>$chamado, 'Mensagens'=> $msg]);
         }
-        else{
-            return view('index');
-        }        
+        return view('index');
+                
        
     }
 
     public function Adicionar_Mensagem(Request $request)
     { 
-        $msg = $this->mensagem->create([
+        $msg = MensagemOs::create([
             'chamado_id' => $request->protocolo,
             'mensagem' => $request->mensagem,           
         ]);        
-        $shownome = $this->chamado->where('id', $request->protocolo)->get();
-        $showmensagem = $this->mensagem->where('chamado_id', $request->protocolo)->get();
-        if ($msg) {
-            return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
-        } else { 
-            return view('index');
-        }
+        $protocolo = ModelOs::find($request->protocolo);
+        // TODO save msg on protocolo
+        return redirect('show');
+
     }
     /**
      * Show the form for editing the specified resource.
