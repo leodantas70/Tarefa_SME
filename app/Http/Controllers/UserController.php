@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use app\Models;
 use App\Models\Mensagem_Os;
 use App\Models\Chamado_Os;
+
 class UserController extends Controller
 {
 
@@ -60,14 +61,14 @@ class UserController extends Controller
      */
     public function show()
     { 
-        return view('mostrarordem');
+        return view('pesquisa');
     }
     public function show_protocolo(Request $request)
     { 
-        $chamado = Chamado_Os::where('protocolo', $request->nprotocolo)->first();
+        $chamado = Chamado_Os::where('protocolo', $request->input('nprotocolo'))->first();
         if ($chamado) {
             $msg = $chamado->mensagens;
-            return view('mostrarordemm', data:['Chamado'=>$chamado, 'Mensagens'=> $msg]);
+            return view('mostrarordem', data:['Chamado'=>$chamado, 'Mensagens'=> $msg]);
         }
         return view('index');
                 
@@ -82,8 +83,7 @@ class UserController extends Controller
         ]);        
         $protocolo = Chamado_Os::find($request->protocolo);
         $protocolo->mensagens()->save($msg);
-        // TODO save msg on protocolo
-        return view('index');
+        return back()->withInput();
 
     }
     /**
