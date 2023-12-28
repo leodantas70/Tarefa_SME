@@ -83,7 +83,7 @@ class UserController extends Controller
         ]);        
         $protocolo = Chamado_Os::find($request->protocolo);
         $protocolo->mensagens()->save($msg);
-        return back()->withInput();
+        return back();
 
     }
     /**
