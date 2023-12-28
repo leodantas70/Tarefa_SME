@@ -10,7 +10,7 @@
     <div class="container-fluid"><br/><br/>
             <h2 class="text-center display-4">Pesquisar Chamado</h2>
             <div class="text-center">
-                <a href="{{ url ("mostrarordem") }}">
+                <a href="{{ url ("pesquisa") }}">
                     <button  type="submit" class="btn btn-primary">Pesquisar Chamado</button><br/>  
                 </a>
             </div>
