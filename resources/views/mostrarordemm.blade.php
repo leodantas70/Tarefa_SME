@@ -15,13 +15,11 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($Chamados as $Chamado)            
         <tr data-widget="expandable-table" aria-expanded="false">
         <td>{{$Chamado->protocolo}}</td>
         <td>{{$Chamado->email}}<</td>
         <td>{{$Chamado->created_at}}</td>
         <td>{{$Chamado->ativo}}</td>
-        @endforeach
         </tr>
     </tbody>
         <thead>
@@ -41,7 +39,9 @@
         <form name="formmsg" id="formmsg" method="POST" action="{{url("mostrarordemm")}}">
         @csrf
         <textarea name="mensagem" id="mensagem" placeholder="Mensagem:" rows="4" cols="50"></textarea><br>
-        @foreach ($Mensagens as $Mensagem) <input class ="form-control" type="hidden" name="protocolo" id="chamado_id" value="{{ $Mensagem->chamado_id }}">    @endforeach
+        @foreach ($Mensagens as $Mensagem)
+        <input class ="form-control" type="hidden" name="protocolo" id="chamado_id" value="{{ $Mensagem->chamado_id }}">
+        @endforeach
         <input class ="btn btn-primary" type="submit" value="Enviar">
         </form>
     </div> 

@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ModelOs;
 use Illuminate\Http\Request;
 use app\Models;
-use App\Models\MensagemOs;
-
+use App\Models\Mensagem_Os;
+use App\Models\Chamado_Os;
 class UserController extends Controller
 {
-
-  private $chamado;
-  private $mensagem;
-   public function __construct()    {
-    $this ->chamado = new ModelOs();
-    $this ->mensagem = new MensagemOs();
-}
 
     public function index()
     {
@@ -33,14 +25,13 @@ class UserController extends Controller
     }
     public function Enviar_Chamado(Request $request )
     {   
-        $cad=$this->chamado->create([
+        $cad=Chamado_Os::create([
         'email' => $request->email,
         'protocolo' => $request->protocolo,
         ]);
-        $id=$this->chamado->where('protocolo', $request->protocolo)->get();
-        $idd=$id->first();
-        $this->mensagem->create([
-        'chamado_id' => $idd->id, 
+        $id=Chamado_Os::where('protocolo', $request->protocolo)->first();
+        Mensagem_Os::create([
+        'chamado_id' => $id->id, 
         'mensagem' => $request->mensagem,   
             ]);
         if($cad){
@@ -73,36 +64,27 @@ class UserController extends Controller
     }
     public function show_protocolo(Request $request)
     { 
-        $shownome = $this->chamado->where('protocolo', $request->nprotocolo)->get();
-        if ($shownome) {
-            $id= $shownome->first();
-            if($id){
-            $showmensagem = $this->mensagem->where('chamado_id', $id->id)->get();
-            return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
-            }
-            else{
-                return view('index');
-            }
+        $chamado = Chamado_Os::where('protocolo', $request->nprotocolo)->first();
+        if ($chamado) {
+            $msg = $chamado->mensagens;
+            return view('mostrarordemm', data:['Chamado'=>$chamado, 'Mensagens'=> $msg]);
         }
-        else{
-            return view('index');
-        }        
+        return view('index');
+                
        
     }
 
     public function Adicionar_Mensagem(Request $request)
     { 
-        $msg = $this->mensagem->create([
+        $msg = new Mensagem_Os([
             'chamado_id' => $request->protocolo,
             'mensagem' => $request->mensagem,           
         ]);        
-        $shownome = $this->chamado->where('id', $request->protocolo)->get();
-        $showmensagem = $this->mensagem->where('chamado_id', $request->protocolo)->get();
-        if ($msg) {
-            return view('mostrarordemm', data:['Chamados'=>$shownome, 'Mensagens'=> $showmensagem]);
-        } else { 
-            return view('index');
-        }
+        $protocolo = Chamado_Os::find($request->protocolo);
+        $protocolo->mensagens()->save($msg);
+        // TODO save msg on protocolo
+        return view('index');
+
     }
     /**
      * Show the form for editing the specified resource.

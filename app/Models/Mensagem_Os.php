@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class MensagemOs extends Model
+class Mensagem_Os extends Model
 {
     protected $table="Mensagem";
     protected $fillable=["chamado_id","mensagem"];
-    public function RelChamado(){
-        return $this->hasone(related:"App\Models\ModelOs",foreignKey:"id",localKey:'chamado_id');
+    public function chamado(){
+        return $this->hasone(related:"App\Models\Chamado_Os",foreignKey:"id",localKey:'chamado_id');
     }
 }
