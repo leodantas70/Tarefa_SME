@@ -1,4 +1,4 @@
-<h2> Tarefa_SME </h2>
+## Tarefa_SME 
 
 Projeto desenvolvido para teste de conhecimento. Este repositório foi criado com a intenção de registrar a tarefa passada para um teste. Itens necessários até o momento para rodar: PHP, Apache, MySQL.
 
@@ -7,13 +7,13 @@ Projeto desenvolvido para teste de conhecimento. Este repositório foi criado co
 - Visualizar chamado. (ok)
 - Adicionar mensagem a chamado. (ok)
 
-<h2> Melhorias </h2>
+## Melhorias 
 
-## Área administrativa
+### Área administrativa
 - Instalação do Node.js.
 - Instalação do Breeze para autenticação de usuário e recuperação de email.
 
-## Gestão de ordem de serviços
+### Gestão de ordem de serviços
 - Visível e acessível apenas para quem tem permissão de administrador. Aqui, eu usaria uma coluna na tabela de usuário para identificar a permissão do mesmo.
 - CRUD de usuários com permissões. Na instalação do Breeze, conseguiria criar os usuários facilmente e suas permissões.
 - Configurar permissões de usuários (visualizar, responder, fechar, cancelar, excluir). Tentaria fazer uma verificação na tabela para verificar se o usuário tem aquela permissão e usaria um if caso tenha.
@@ -25,7 +25,7 @@ Projeto desenvolvido para teste de conhecimento. Este repositório foi criado co
 - CRUD de opções de status de ordem de serviço.
 - CRUD de Categoria de ordem de serviços. Com as melhorias feitas em **Gestão de ordem de serviços**, eu conseguiria facilmente resolver essa parte da tarefa 'Cada ordem de serviço tem sua coluna de status'.
 
-## Relatórios
+### Relatórios
 - Todos os relatórios deverão possuir filtro de data de abertura e de fechamento de ordem de serviço.
 - Relatório quantitativo por categoria, listando cada status disponível.
 - Relatório quantitativo por técnico.
@@ -36,7 +36,7 @@ Projeto desenvolvido para teste de conhecimento. Este repositório foi criado co
   - Quantidade de respostas do técnico.
 - Relatório de tempo médio de atendimento por categoria, compreendendo abertura e encerramento da ordem de serviço.
 
-<h2> Problemas </h2>
+## Problemas
 
 - Para próximas melhorias, algumas mudanças no banco de dados deveriam ser feitas.
 - Toda essa parte de **Relatórios** seria um problema, pois, de imediato, não consegui pensar em uma solução.
