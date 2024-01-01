@@ -37,9 +37,6 @@ Projeto desenvolvido para teste de conhecimento. Este repositório foi criado co
 - Relatório de tempo médio de atendimento por categoria, compreendendo abertura e encerramento da ordem de serviço.
 
 ## Problemas
-
-- Para próximas melhorias, algumas mudanças no banco de dados deveriam ser feitas.
-- Toda essa parte de **Relatórios** seria um problema, pois, de imediato, não consegui pensar em uma solução.
-
+- ATEÇÃO: Validar se a estrutura atual será compativel com os relatórios.
 
 
